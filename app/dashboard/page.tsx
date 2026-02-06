@@ -4,7 +4,11 @@ import prisma from "@/lib/prisma";
 
 
 export default async function Dashboard() {
-  const projects = await prisma.project.findMany();
+  const projects = await prisma.project.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
   return (
     <div>
