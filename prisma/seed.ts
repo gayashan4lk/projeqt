@@ -18,6 +18,13 @@ const projectData: Prisma.ProjectCreateInput[] = [
 		deliveryDate: new Date("2023-06-01"),
 		status: "IN_PROGRESS",
 	},
+	{
+		name: "Project 2",
+		description: "This is the second project",
+		startDate: new Date("2023-02-01"),
+		deliveryDate: new Date("2023-07-01"),
+		status: "NOT_STARTED",
+	},
 ]
 
 export async function main() {
