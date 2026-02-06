@@ -2,10 +2,21 @@
 
 import { createProject } from '@/actions/project'
 import { Button } from '@/components/ui/button'
+import { ProjectActionResponse } from "@/types/project"
 import { useActionState } from 'react'
+import { success } from "zod"
+
+const initialState : ProjectActionResponse = {
+	success: false,
+	message: '',
+}
 
 export default function NewProject() {
-	const [state, action, isPending] = useActionState(createProject, 0)
+	const [state, action, isPending] = useActionState(createProject, initialState)
+
+	const fieldErrors = state?.errors?.fieldErrors || {}
+
+	console.log('fieldErrors', fieldErrors)
 
 	return (
 		<div>
@@ -70,7 +81,6 @@ export default function NewProject() {
 						<Button type="submit" className="cursor-pointer" disabled={isPending}>
 							{isPending ? 'Loading' : 'Submit'}
 						</Button>
-						<p>Current State: {state}</p>
 					</div>
 				</form>
 			</main>

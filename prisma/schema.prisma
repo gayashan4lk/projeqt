@@ -19,8 +19,8 @@ model Project {
   description String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  startDate   DateTime
-  deliveryDate DateTime
+  startDate   DateTime @db.Date
+  deliveryDate DateTime @db.Date
   status      String
   active      Boolean  @default(true)
 }
