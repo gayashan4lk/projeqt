@@ -39,7 +39,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	return (
 		<Sidebar {...props}>
 			<SidebarHeader />
-
 			<SidebarContent>
 				<SidebarGroup />
 				<SidebarGroupLabel>Organization</SidebarGroupLabel>
