@@ -38,9 +38,11 @@ const projectMenu = [
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	return (
 		<Sidebar {...props}>
-			<SidebarHeader />
+			<SidebarHeader>
+				<h1 className="pl-2 text-xl font-bold">Projeqtz</h1>
+			</SidebarHeader>
 			<SidebarContent>
-				<SidebarGroup />
+				<SidebarGroup>
 				<SidebarGroupLabel>Organization</SidebarGroupLabel>
 				<SidebarMenu>
 					{orgMenu.map((item) => (
@@ -53,8 +55,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 						</SidebarMenuItem>
 					))}
 				</SidebarMenu>
-				<SidebarGroup />
-				<SidebarGroup />
+				</SidebarGroup>
+				<SidebarGroup>
 				<SidebarGroupLabel>Project</SidebarGroupLabel>
 				<SidebarMenu>
 					{projectMenu.map((item) => (
@@ -67,7 +69,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 						</SidebarMenuItem>
 					))}
 				</SidebarMenu>
-				<SidebarGroup />
+				</SidebarGroup>
 			</SidebarContent>
 			<SidebarFooter />
 		</Sidebar>
