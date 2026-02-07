@@ -4,7 +4,6 @@ import { createProject } from '@/actions/project'
 import { Button } from '@/components/ui/button'
 import { ProjectActionResponse } from "@/types/project"
 import { useActionState } from 'react'
-import { success } from "zod"
 
 const initialState : ProjectActionResponse = {
 	success: false,
@@ -70,8 +69,8 @@ export default function NewProject() {
 							<label htmlFor="status" className="block font-semibold">
 								Status
 							</label>
-							<select name="status" id="status">
-								<option value="not-started" selected>Not Started</option>
+							<select name="status" id="status" defaultValue="not-started">
+								<option value="not-started">Not Started</option>
 								<option value="on-track">On Track</option>
 								<option value="off-track">Off Track</option>
 								<option value="on-hold">On Hold</option>
