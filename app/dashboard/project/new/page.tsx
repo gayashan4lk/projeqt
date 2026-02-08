@@ -1,8 +1,8 @@
 'use client'
 
-import { createProject } from '@/actions/project'
+import { createProject } from '@/actions/projectAction'
 import { Button } from '@/components/ui/button'
-import { ProjectActionResponse } from "@/types/project"
+import { ProjectActionResponse } from "@/lib/schemas/projectSchema"
 import { useActionState } from 'react'
 
 const initialState : ProjectActionResponse = {
@@ -14,8 +14,6 @@ export default function NewProject() {
 	const [state, action, isPending] = useActionState(createProject, initialState)
 
 	const fieldErrors = state?.errors?.fieldErrors || {}
-
-	console.log('fieldErrors', fieldErrors)
 
 	return (
 		<div>
