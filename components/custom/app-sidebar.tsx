@@ -15,9 +15,9 @@ import {
 
 const orgMenu = [
 	{ title: 'Overview', url: '/dashboard', isActive: true },
-	{ title: 'Projects', url: '/dashboard/project/all', isActive: false },
-	{ title: 'Clients', url: '/dashboard/client/all', isActive: false },
-	{ title: 'Teams', url: '/dashboard/team/all', isActive: false },
+	{ title: 'Projects', url: '/dashboard/projects', isActive: false },
+	{ title: 'Clients', url: '/dashboard/clients', isActive: false },
+	{ title: 'Teams', url: '/dashboard/teams', isActive: false },
 	{ title: 'Payment summary', url: '/dashboard/payment-summary', isActive: false },
 	{ title: 'Delivery calendar', url: '/dashboard/delivery-calendar', isActive: false },
 ]
@@ -43,32 +43,32 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 			</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup>
-				<SidebarGroupLabel>Organization</SidebarGroupLabel>
-				<SidebarMenu>
-					{orgMenu.map((item) => (
-						<SidebarMenuItem key={item.title}>
-							<SidebarMenuButton asChild>
-								<a href={item.url} className="font-medium">
-									{item.title}
-								</a>
-							</SidebarMenuButton>
-						</SidebarMenuItem>
-					))}
-				</SidebarMenu>
+					<SidebarGroupLabel>Organization</SidebarGroupLabel>
+					<SidebarMenu>
+						{orgMenu.map((item) => (
+							<SidebarMenuItem key={item.title}>
+								<SidebarMenuButton asChild>
+									<a href={item.url} className="font-medium">
+										{item.title}
+									</a>
+								</SidebarMenuButton>
+							</SidebarMenuItem>
+						))}
+					</SidebarMenu>
 				</SidebarGroup>
 				<SidebarGroup>
-				<SidebarGroupLabel>Project</SidebarGroupLabel>
-				<SidebarMenu>
-					{projectMenu.map((item) => (
-						<SidebarMenuItem key={item.title}>
-							<SidebarMenuButton asChild>
-								<a href={item.url} className="font-medium">
-									{item.title}
-								</a>
-							</SidebarMenuButton>
-						</SidebarMenuItem>
-					))}
-				</SidebarMenu>
+					<SidebarGroupLabel>Project</SidebarGroupLabel>
+					<SidebarMenu>
+						{projectMenu.map((item) => (
+							<SidebarMenuItem key={item.title}>
+								<SidebarMenuButton asChild>
+									<a href={item.url} className="font-medium">
+										{item.title}
+									</a>
+								</SidebarMenuButton>
+							</SidebarMenuItem>
+						))}
+					</SidebarMenu>
 				</SidebarGroup>
 			</SidebarContent>
 			<SidebarFooter />
