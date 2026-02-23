@@ -8,7 +8,7 @@ export default async function Projects() {
 	return (
 		<div>
 			<main>
-				<Button variant="default">
+				<Button variant="default" className="mb-2">
 					<Link href="/dashboard/projects/new">New Project</Link>
 				</Button>
 				<Suspense fallback={<ProjectCardSkeleton />}>
