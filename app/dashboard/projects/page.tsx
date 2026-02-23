@@ -8,7 +8,6 @@ export default async function Projects() {
 	return (
 		<div>
 			<main>
-				<h1 className="text-4xl">Organization {'>'} Projects</h1>
 				<Button variant="default">
 					<Link href="/dashboard/projects/new">New Project</Link>
 				</Button>
