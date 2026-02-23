@@ -1,15 +1,10 @@
+import ProjectsList from '@/components/custom/projects-list'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import prisma from '@/lib/prisma'
-import ProjectCard from '@/components/custom/project-card'
+import { ProjectCardSkeleton } from '@/components/custom/skeletons'
+import { Suspense } from 'react'
 
 export default async function Projects() {
-	const projects = await prisma.project.findMany({
-		orderBy: {
-			createdAt: 'desc',
-		},
-	})
-
 	return (
 		<div>
 			<main>
@@ -17,16 +12,9 @@ export default async function Projects() {
 				<Button variant="default">
 					<Link href="/dashboard/projects/new">New Project</Link>
 				</Button>
-				{projects.map((project) => (
-					<ProjectCard
-						key={project.id}
-						name={project.name}
-						description={project.description || ''}
-						startDate={project.startDate}
-						deliveryDate={project.deliveryDate}
-						status={project.status}
-					/>
-				))}
+				<Suspense fallback={<ProjectCardSkeleton />}>
+					<ProjectsList />
+				</Suspense>
 			</main>
 		</div>
 	)
