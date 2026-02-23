@@ -9,7 +9,7 @@ export default async function ProjectsList() {
 	})
 
 	return (
-		<div>
+		<div className="flex flex-wrap">
 			{projects.map((project) => (
 				<ProjectCard
 					key={project.id}
