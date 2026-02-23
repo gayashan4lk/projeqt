@@ -4,6 +4,8 @@ import prisma from '@/lib/prisma'
 import { z } from 'zod'
 import { projectSchema } from '@/lib/schemas/projectSchema'
 import type { ProjectActionResponse } from '@/lib/schemas/projectSchema'
+import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
 
 export async function createProject(
 	prevState: ProjectActionResponse | null,
@@ -49,8 +51,6 @@ export async function createProject(
 		}
 	}
 
-	return {
-		success: true,
-		message: 'Project created successfully',
-	}
+	revalidatePath('/dashboard/projects')
+	redirect('/dashboard/projects')
 }
