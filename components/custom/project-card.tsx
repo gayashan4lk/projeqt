@@ -2,7 +2,7 @@ import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader,
 
 export default function ProjectCard({name, description, startDate, deliveryDate, status}: {name: string, description: string, startDate?: Date, deliveryDate?: Date, status?: string}) {
 	return (
-		<Card className="m-2 h-52 w-60">
+		<Card className="h-52 w-60">
 			<CardHeader>
 				<CardTitle>{name}</CardTitle>
 				<CardDescription>{description}</CardDescription>

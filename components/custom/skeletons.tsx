@@ -3,7 +3,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 export function ProjectCardSkeleton() {
 	return (
-		<Card className="m-2 h-52 w-60">
+		<Card className="h-52 w-60">
 			<CardHeader>
 				<CardTitle>
 					<Skeleton className="h-6" />
