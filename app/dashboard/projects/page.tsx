@@ -3,7 +3,7 @@ import Link from 'next/link'
 import prisma from '@/lib/prisma'
 import ProjectCard from '@/components/custom/project-card'
 
-export default async function AllProjects() {
+export default async function Projects() {
 	const projects = await prisma.project.findMany({
 		orderBy: {
 			createdAt: 'desc',
@@ -15,7 +15,7 @@ export default async function AllProjects() {
 			<main>
 				<h1 className="text-4xl">Organization {'>'} Projects</h1>
 				<Button variant="default">
-					<Link href="/dashboard/project/new">New Project</Link>
+					<Link href="/dashboard/projects/new">New Project</Link>
 				</Button>
 				{projects.map((project) => (
 					<ProjectCard
