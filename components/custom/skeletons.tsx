@@ -1,11 +1,20 @@
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Skeleton } from '@/components/ui/skeleton'
+
 export function ProjectCardSkeleton() {
 	return (
-		<div className="border rounded-md p-4 mb-4 animate-pulse">
-			<div className="h-6 bg-gray-300 rounded w-1/2 mb-2"></div>
-			<div className="h-4 bg-gray-300 rounded w-full mb-1"></div>
-			<div className="h-4 bg-gray-300 rounded w-full mb-1"></div>
-			<div className="h-4 bg-gray-300 rounded w-full mb-1"></div>
-			<div className="h-4 bg-gray-300 rounded w-full mb-1"></div>
-		</div>
+		<Card className="m-2 w-60">
+			<CardHeader>
+				<CardTitle>
+					<Skeleton className="h-6" />
+				</CardTitle>
+				<CardDescription>
+					<Skeleton className="h-4" />
+				</CardDescription>
+			</CardHeader>
+			<CardContent>
+				<Skeleton className="h-10" />
+			</CardContent>
+		</Card>
 	)
 }
