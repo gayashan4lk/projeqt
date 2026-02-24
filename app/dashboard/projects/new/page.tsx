@@ -2,10 +2,10 @@
 
 import { createProject } from '@/actions/projectAction'
 import { Button } from '@/components/ui/button'
-import { ProjectActionResponse } from "@/lib/schemas/projectSchema"
+import { CreateProjectActionResponse } from '@/types/projectSchema'
 import { useActionState } from 'react'
 
-const initialState : ProjectActionResponse = {
+const initialState : CreateProjectActionResponse = {
 	success: false,
 	message: '',
 }
@@ -31,6 +31,7 @@ export default function NewProject() {
 								placeholder="Project Name"
 								className="block w-full rounded-md border-2 border-slate-300 p-2"
 							/>
+							{fieldErrors.name && <p className="text-red-500 text-sm">{fieldErrors.name[0]}</p>}
 						</div>
 						<div className="space-y-1">
 							<label htmlFor="description" className="block font-semibold">
@@ -42,6 +43,7 @@ export default function NewProject() {
 								placeholder="Project Description"
 								className="block w-full rounded-md border-2 border-slate-300 p-2"
 							/>
+							{fieldErrors.description && <p className="text-red-500 text-sm">{fieldErrors.description[0]}</p>}
 						</div>
 						<div className="space-y-1">
 							<label htmlFor="startDate" className="block font-semibold">
@@ -52,6 +54,7 @@ export default function NewProject() {
 								name="startDate"
 								className="block w-full rounded-md border-2 border-slate-300 p-2"
 							/>
+							{fieldErrors.startDate && <p className="text-red-500 text-sm">{fieldErrors.startDate[0]}</p>}
 						</div>
 						<div className="space-y-1">
 							<label htmlFor="deliveryDate" className="block font-semibold">
@@ -62,6 +65,7 @@ export default function NewProject() {
 								name="deliveryDate"
 								className="block w-full rounded-md border-2 border-slate-300 p-2"
 							/>
+							{fieldErrors.deliveryDate && <p className="text-red-500 text-sm">{fieldErrors.deliveryDate[0]}</p>}
 						</div>
 						<div className="space-y-1">
 							<label htmlFor="status" className="block font-semibold">
@@ -74,6 +78,7 @@ export default function NewProject() {
 								<option value="on-hold">On Hold</option>
 								<option value="completed">Completed</option>
 							</select>
+							{fieldErrors.status && <p className="text-red-500 text-sm">{fieldErrors.status[0]}</p>}
 						</div>
 						<Button type="submit" className="cursor-pointer" disabled={isPending}>
 							{isPending ? 'Loading' : 'Submit'}
