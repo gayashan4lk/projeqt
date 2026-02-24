@@ -21,6 +21,14 @@ model Project {
   updatedAt   DateTime @updatedAt
   startDate   DateTime @db.Date
   deliveryDate DateTime @db.Date
-  status      String
+  status      ProjectStatus @default(NOT_STARTED)
   active      Boolean  @default(true)
+}
+
+enum ProjectStatus {
+  NOT_STARTED
+  ON_TRACK
+  OFF_TRACK
+  ON_HOLD
+  COMPLETED
 }

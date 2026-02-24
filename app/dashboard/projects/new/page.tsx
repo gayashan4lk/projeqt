@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { CreateProjectActionResponse } from '@/types/projectSchema'
 import { useActionState } from 'react'
 
-const initialState : CreateProjectActionResponse = {
+const initialState: CreateProjectActionResponse = {
 	success: false,
 	message: '',
 }
@@ -31,7 +31,7 @@ export default function NewProject() {
 								placeholder="Project Name"
 								className="block w-full rounded-md border-2 border-slate-300 p-2"
 							/>
-							{fieldErrors.name && <p className="text-red-500 text-sm">{fieldErrors.name[0]}</p>}
+							{fieldErrors.name && <p className="text-sm text-red-500">{fieldErrors.name[0]}</p>}
 						</div>
 						<div className="space-y-1">
 							<label htmlFor="description" className="block font-semibold">
@@ -43,18 +43,14 @@ export default function NewProject() {
 								placeholder="Project Description"
 								className="block w-full rounded-md border-2 border-slate-300 p-2"
 							/>
-							{fieldErrors.description && <p className="text-red-500 text-sm">{fieldErrors.description[0]}</p>}
+							{fieldErrors.description && <p className="text-sm text-red-500">{fieldErrors.description[0]}</p>}
 						</div>
 						<div className="space-y-1">
 							<label htmlFor="startDate" className="block font-semibold">
 								Start Date
 							</label>
-							<input
-								type="date"
-								name="startDate"
-								className="block w-full rounded-md border-2 border-slate-300 p-2"
-							/>
-							{fieldErrors.startDate && <p className="text-red-500 text-sm">{fieldErrors.startDate[0]}</p>}
+							<input type="date" name="startDate" className="block w-full rounded-md border-2 border-slate-300 p-2" />
+							{fieldErrors.startDate && <p className="text-sm text-red-500">{fieldErrors.startDate[0]}</p>}
 						</div>
 						<div className="space-y-1">
 							<label htmlFor="deliveryDate" className="block font-semibold">
@@ -65,20 +61,20 @@ export default function NewProject() {
 								name="deliveryDate"
 								className="block w-full rounded-md border-2 border-slate-300 p-2"
 							/>
-							{fieldErrors.deliveryDate && <p className="text-red-500 text-sm">{fieldErrors.deliveryDate[0]}</p>}
+							{fieldErrors.deliveryDate && <p className="text-sm text-red-500">{fieldErrors.deliveryDate[0]}</p>}
 						</div>
 						<div className="space-y-1">
 							<label htmlFor="status" className="block font-semibold">
 								Status
 							</label>
-							<select name="status" id="status" defaultValue="not-started">
-								<option value="not-started">Not Started</option>
-								<option value="on-track">On Track</option>
-								<option value="off-track">Off Track</option>
-								<option value="on-hold">On Hold</option>
-								<option value="completed">Completed</option>
+							<select name="status" id="status" defaultValue="NOT_STARTED">
+								<option value="NOT_STARTED">Not Started</option>
+								<option value="ON_TRACK">On Track</option>
+								<option value="OFF_TRACK">Off Track</option>
+								<option value="ON_HOLD">On Hold</option>
+								<option value="COMPLETED">Completed</option>
 							</select>
-							{fieldErrors.status && <p className="text-red-500 text-sm">{fieldErrors.status[0]}</p>}
+							{fieldErrors.status && <p className="text-sm text-red-500">{fieldErrors.status[0]}</p>}
 						</div>
 						<Button type="submit" className="cursor-pointer" disabled={isPending}>
 							{isPending ? 'Loading' : 'Submit'}

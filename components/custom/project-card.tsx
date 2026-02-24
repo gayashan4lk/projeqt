@@ -3,7 +3,7 @@ import type { Project } from '@/types/projectSchema'
 
 export default function ProjectCard({ project }: { project: Project }) {
 	return (
-		<Card className="h-52 w-60">
+		<Card className="w-60">
 			<CardHeader>
 				<CardTitle>{project.name}</CardTitle>
 				<CardDescription>{project.description}</CardDescription>
