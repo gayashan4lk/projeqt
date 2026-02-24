@@ -1,22 +1,30 @@
 import { z } from 'zod'
 
-export const projectSchema = z.object({
+export const ProjectSchema = z.object({
+	id: z.string(),
 	name: z.string().min(1, 'Name is required'),
-	description: z.string().min(1, 'Description is required'),
-	startDate: z.iso.datetime({ message: 'Invalid start date' }),
-	deliveryDate: z.iso.datetime({ message: 'Invalid delivery date' }),
-	status: z.enum(['not-started', 'on-track', 'off-track', 'on-hold', 'completed']),
+	description: z.string().nullable(),
+	startDate: z.coerce.date(),
+	deliveryDate: z.coerce.date(),
+	status: z.string(),
+	createdAt: z.coerce.date(),
+	updatedAt: z.coerce.date(),
+	active: z.boolean(),
 })
 
-type ProjectFormData = z.infer<typeof projectSchema>
+export type Project = z.infer<typeof ProjectSchema>
 
-export interface ProjectActionResponse {
+export const CreateProjectSchema = ProjectSchema.omit({ id: true, createdAt: true, updatedAt: true, active: true })
+
+type CreateProjectFormData = z.infer<typeof CreateProjectSchema>
+
+export interface CreateProjectActionResponse {
 	success: boolean
 	message: string
 	errors?: {
 		formErrors: string[]
 		fieldErrors: {
-			[K in keyof ProjectFormData]?: string[]
+			[K in keyof CreateProjectFormData]?: string[]
 		}
 	}
 }

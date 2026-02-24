@@ -1,19 +1,20 @@
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import type { Project } from '@/types/projectSchema'
 
-export default function ProjectCard({name, description, startDate, deliveryDate, status}: {name: string, description: string, startDate?: Date, deliveryDate?: Date, status?: string}) {
+export default function ProjectCard({ project }: { project: Project }) {
 	return (
 		<Card className="h-52 w-60">
 			<CardHeader>
-				<CardTitle>{name}</CardTitle>
-				<CardDescription>{description}</CardDescription>
+				<CardTitle>{project.name}</CardTitle>
+				<CardDescription>{project.description}</CardDescription>
 			</CardHeader>
 			<CardContent>
-				<span>Start: {startDate?.toLocaleDateString('en-GB')}</span>
+				<span>Start: {project.startDate?.toLocaleDateString('en-GB')}</span>
 				<br />
-				<span>Delivery: {deliveryDate?.toLocaleDateString('en-GB')}</span>
+				<span>Delivery: {project.deliveryDate?.toLocaleDateString('en-GB')}</span>
 			</CardContent>
 			<CardFooter>
-				<span>{status}</span>
+				<span>{project.status}</span>
 			</CardFooter>
 		</Card>
 	)

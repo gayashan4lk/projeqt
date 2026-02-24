@@ -11,14 +11,7 @@ export default async function ProjectsList() {
 	return (
 		<div className="flex flex-wrap gap-4">
 			{projects.map((project) => (
-				<ProjectCard
-					key={project.id}
-					name={project.name}
-					description={project.description || ''}
-					startDate={project.startDate}
-					deliveryDate={project.deliveryDate}
-					status={project.status}
-				/>
+				<ProjectCard key={project.id} project={project} />
 			))}
 		</div>
 	)
