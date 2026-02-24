@@ -2,7 +2,7 @@
 
 import { createProject } from '@/actions/projectAction'
 import { Button } from '@/components/ui/button'
-import { ProjectActionResponse } from "@/lib/schemas/projectSchema"
+import { ProjectActionResponse } from '@/types/projectSchema'
 import { useActionState } from 'react'
 
 const initialState : ProjectActionResponse = {
