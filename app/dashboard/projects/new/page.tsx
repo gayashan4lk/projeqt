@@ -14,7 +14,6 @@ export default function NewProject() {
 	const [state, action, isPending] = useActionState(createProject, initialState)
 
 	const fieldErrors = state?.errors?.fieldErrors || {}
-	console.log("#fieldErrors:",fieldErrors)
 
 	return (
 		<div>
