@@ -1,11 +1,8 @@
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import type { Project, ProjectStatus } from '@/types/projectSchema'
-import { Button } from '@/components/ui/button'
+import { Card, CardAction, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import type { Project } from '@/types/projectSchema'
 import { CircleArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import { Badge } from '@/components/ui/badge'
-import clsx from 'clsx'
-import { getStatusLabel } from '@/lib/utils'
+import ProjectStatusBadge from './project-status-badge'
 
 export default function ProjectCard({ project }: { project: Project }) {
 	return (
@@ -24,16 +21,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 				<span className="text-sm text-slate-500">Delivery: {project.deliveryDate?.toLocaleDateString('en-GB')}</span>
 			</CardContent>
 			<CardFooter>
-				<Badge
-					className={clsx({
-						'bg-green-200 text-green-800': project.status === 'ON_TRACK',
-						'bg-red-200 text-red-800': project.status === 'OFF_TRACK',
-						'bg-yellow-200 text-yellow-800': project.status === 'ON_HOLD',
-						'bg-slate-200 text-slate-800': project.status === 'NOT_STARTED' || project.status === 'COMPLETED',
-					})}
-				>
-					{getStatusLabel(project.status)}
-				</Badge>
+				<ProjectStatusBadge status={project.status} />
 			</CardFooter>
 		</Card>
 	)
