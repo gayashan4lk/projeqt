@@ -21,41 +21,26 @@ export default async function ProjectPage(props: { params: { id: string } }) {
 		<div>
 			<main>
 				<h1 className="text-2xl font-bold">{project.name}</h1>
-				<div className="grid gap-3">
-					<dl className="grid md:grid-cols-2">
-						<dt className="text-sm font-medium text-gray-500">Name</dt>
-						<dd className="text-sm">{project.name}</dd>
-					</dl>
-					<dl className="grid md:grid-cols-2">
-						<dt>Description</dt>
-						<dd>{project.description}</dd>
-					</dl>
-					<dl className="grid md:grid-cols-2">
-						<dt>Start Date</dt>
-						<dd>{project.startDate?.toLocaleDateString('en-GB')}</dd>
-					</dl>
-					<dl className="grid md:grid-cols-2">
-						<dt>Delivery Date</dt>
-						<dd>{project.deliveryDate?.toLocaleDateString('en-GB')}</dd>
-					</dl>
-					<dl className="grid md:grid-cols-2">
-						<dt>Status</dt>
-						<dd>{project.status}</dd>
-					</dl>
-					<dl className="grid md:grid-cols-2">
-						<dt>Created At</dt>
-						<dd>{project.createdAt.toISOString()}</dd>
-					</dl>
-					<dl className="grid md:grid-cols-2">
-						<dt>Updated At</dt>
-						<dd>{project.updatedAt.toISOString()}</dd>
-					</dl>
-					<dl className="grid md:grid-cols-2">
-						<dt>Active</dt>
-						<dd>{project.active ? 'Yes' : 'No'}</dd>
-					</dl>
+				<div className="mt-4 grid gap-3 divide-y">
+					<DescriptionListItem field="Name" value={project.name} />
+					<DescriptionListItem field="Description" value={project.description || ''} />
+					<DescriptionListItem field="Start Date" value={project.startDate?.toLocaleDateString('en-GB')} />
+					<DescriptionListItem field="Delivery Date" value={project.deliveryDate?.toLocaleDateString('en-GB')} />
+					<DescriptionListItem field="Status" value={project.status} />
+					<DescriptionListItem field="Created At" value={project.createdAt.toISOString()} />
+					<DescriptionListItem field="Updated At" value={project.updatedAt.toISOString()} />
+					<DescriptionListItem field="Active" value={project.active ? 'Yes' : 'No'} />
 				</div>
 			</main>
 		</div>
+	)
+}
+
+function DescriptionListItem({ field, value }: { field: string; value: string }) {
+	return (
+		<dl className="grid pb-3 md:grid-cols-2">
+			<dt className="text-sm font-medium text-gray-500">{field}</dt>
+			<dd className="text-sm">{value}</dd>
+		</dl>
 	)
 }
