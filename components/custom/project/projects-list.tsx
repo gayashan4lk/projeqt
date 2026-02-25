@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma'
-import ProjectCard from '@/components/custom/project-card'
+import ProjectCard from '@/components/custom/project/project-card'
 
 export default async function ProjectsList() {
 	const projects = await prisma.project.findMany({
