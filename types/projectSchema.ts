@@ -2,6 +2,8 @@ import { z } from 'zod'
 
 const ProjectStatus = z.enum(['NOT_STARTED', 'ON_TRACK', 'OFF_TRACK', 'ON_HOLD', 'COMPLETED'])
 
+export type ProjectStatus = z.infer<typeof ProjectStatus>
+
 export const ProjectSchema = z.object({
 	id: z.string(),
 	name: z.string().min(1, 'Name is required'),

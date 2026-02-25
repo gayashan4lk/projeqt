@@ -1,4 +1,4 @@
-import ProjectsList from '@/components/custom/projects-list'
+import ProjectsList from '@/components/custom/project/projects-list'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { ProjectCardSkeleton } from '@/components/custom/skeletons'
