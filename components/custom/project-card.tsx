@@ -12,7 +12,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 				<CardDescription>{project.description}</CardDescription>
 				<CardAction>
 					<Link href={`/dashboard/projects/${project.id}`}>
-						<CircleArrowRight />
+						<CircleArrowRight size={20} />
 					</Link>
 				</CardAction>
 			</CardHeader>
