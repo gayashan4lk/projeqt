@@ -26,6 +26,7 @@ import { useForm } from '@tanstack/react-form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import z from 'zod'
+import { DatePickerInput } from '../date-picker-input'
 
 const initialState: CreateProjectActionResponse = {
 	success: false,
@@ -45,8 +46,8 @@ const CreateProjectFormSchema = z.object({
 		'ON_HOLD',
 		'COMPLETED',
 	]),
-	startDate: z.string().min(1, 'Start date is required'),
-	deliveryDate: z.string().min(1, 'Delivery date is required'),
+	startDate: z.any(),
+	deliveryDate: z.any(),
 })
 
 export default function ProjectCreateFormShadcnTanstack() {
@@ -156,26 +157,83 @@ export default function ProjectCreateFormShadcnTanstack() {
 						Enter start date and delivery date
 					</FieldDescription>
 					<FieldGroup>
-						<Field>
-							<FieldLabel htmlFor="startDate">Start Date</FieldLabel>
-							<input
-								id="startDate"
-								type="date"
-								name="startDate"
-								placeholder="Start Date"
-								className="block w-full rounded-md border-2 border-slate-300 p-2"
-							/>
-						</Field>
-						<Field>
-							<FieldLabel htmlFor="deliveryDate">Delivery Date</FieldLabel>
-							<input
-								id="deliveryDate"
-								type="date"
-								name="deliveryDate"
-								placeholder="Delivery Date"
-								className="block w-full rounded-md border-2 border-slate-300 p-2"
-							/>
-						</Field>
+						<form.Field
+							name="startDate"
+							children={(field) => {
+								const isInvalid =
+									field.state.meta.isTouched && !field.state.meta.isValid
+
+								return (
+									<Field data-invalid={isInvalid}>
+										<FieldLabel htmlFor={field.name}>Start Date</FieldLabel>
+										<FieldDescription>
+											Enter the start date of your project
+										</FieldDescription>
+										<Input
+											id={field.name}
+											name={field.name}
+											type="date"
+											value={field.state.value as string}
+											onBlur={field.handleBlur}
+											onChange={(e) => field.handleChange(e.target.value)}
+											aria-invalid={isInvalid}
+											placeholder="Select a date"
+										/>
+
+										{isInvalid && (
+											<FieldError errors={field.state.meta.errors} />
+										)}
+									</Field>
+								)
+							}}
+						/>
+
+						{/* <form.Field
+							name="startDate"
+							children={(field) => {
+								const isInvalid =
+									field.state.meta.isTouched && !field.state.meta.isValid
+
+								return (
+									<DatePickerInput
+										isInvalid={isInvalid}
+										field={field}
+										fieldLabel="Start Date"
+										fieldDescription="Enter the start date of your project"
+									/>
+								)
+							}}
+						/> */}
+						<form.Field
+							name="deliveryDate"
+							children={(field) => {
+								const isInvalid =
+									field.state.meta.isTouched && !field.state.meta.isValid
+
+								return (
+									<Field data-invalid={isInvalid}>
+										<FieldLabel htmlFor={field.name}>Delivery Date</FieldLabel>
+										<FieldDescription>
+											Enter the delivery date of your project
+										</FieldDescription>
+										<Input
+											id={field.name}
+											name={field.name}
+											type="date"
+											value={field.state.value as string}
+											onBlur={field.handleBlur}
+											onChange={(e) => field.handleChange(e.target.value)}
+											aria-invalid={isInvalid}
+											placeholder="Select a date"
+										/>
+
+										{isInvalid && (
+											<FieldError errors={field.state.meta.errors} />
+										)}
+									</Field>
+								)
+							}}
+						/>
 					</FieldGroup>
 				</FieldSet>
 				<FieldSeparator />

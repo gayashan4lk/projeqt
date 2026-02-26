@@ -9,10 +9,12 @@ export default async function Projects() {
 	return (
 		<div>
 			<main>
-				<Button variant="default" className="mb-2">
-					<FolderPlus />
-					<Link href="/dashboard/projects/create">New Project</Link>
-				</Button>
+				<Link href="/dashboard/projects/create">
+					<Button variant="default" className="mb-2">
+						<FolderPlus />
+						New Project
+					</Button>
+				</Link>
 				<Suspense fallback={<ProjectCardSkeleton />}>
 					<ProjectsList />
 				</Suspense>
