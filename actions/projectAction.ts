@@ -11,8 +11,9 @@ export async function createProject(
 	prevState: CreateProjectActionResponse | null,
 	formData: FormData,
 ): Promise<CreateProjectActionResponse> {
-	const { data, success, error } = CreateProjectSchema.safeParse(Object.fromEntries(formData.entries()))
-	console.log('data:', data)
+	const { data, success, error } = CreateProjectSchema.safeParse(
+		Object.fromEntries(formData.entries()),
+	)
 
 	if (!success) {
 		return {

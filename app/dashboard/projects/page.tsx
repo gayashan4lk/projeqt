@@ -11,7 +11,7 @@ export default async function Projects() {
 			<main>
 				<Button variant="default" className="mb-2">
 					<FolderPlus />
-					<Link href="/dashboard/projects/new">New Project</Link>
+					<Link href="/dashboard/projects/create">New Project</Link>
 				</Button>
 				<Suspense fallback={<ProjectCardSkeleton />}>
 					<ProjectsList />
