@@ -35,19 +35,19 @@ export const CreateProjectSchema = ProjectSchema.omit({
 })
 
 // Schema for TanStack Form client-side validation (matches defaultValues shape)
-export const CreateProjectFormSchema = z.object({
-	name: z
-		.string()
-		.min(1, 'Name cannot be empty')
-		.max(30, 'Name must be less than 30 characters'),
-	description: z.string(),
-})
+// export const CreateProjectFormSchema = z.object({
+// 	name: z
+// 		.string()
+// 		.min(1, 'Name cannot be empty')
+// 		.max(30, 'Name must be less than 30 characters'),
+// 	description: z.string(),
+// })
 
-export type CreateProjectFormSchemaType = z.infer<
-	typeof CreateProjectFormSchema
->
+// export type CreateProjectFormSchemaType = z.infer<
+// 	typeof CreateProjectFormSchema
+// >
 
-type CreateProjectFormData = z.infer<typeof CreateProjectSchema>
+export type CreateProjectFormData = z.infer<typeof CreateProjectSchema>
 
 export interface CreateProjectActionResponse {
 	success: boolean

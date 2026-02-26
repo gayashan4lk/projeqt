@@ -22,12 +22,13 @@ import {
 } from '@/components/ui/select'
 import {
 	CreateProjectActionResponse,
-	CreateProjectFormSchema,
-	CreateProjectFormSchemaType,
+	CreateProjectSchema,
+	CreateProjectFormData,
 } from '@/types/projectSchema'
 import { useActionState } from 'react'
 import { useForm } from '@tanstack/react-form'
 import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 
 const initialState: CreateProjectActionResponse = {
 	success: false,
@@ -39,16 +40,19 @@ export default function ProjectCreateFormShadcnTanstack() {
 
 	const fieldErrors = state?.errors?.fieldErrors || {}
 
-	const myDefaultValues: CreateProjectFormSchemaType = {
+	const myDefaultValues: CreateProjectFormData = {
 		name: '',
 		description: '',
+		status: 'NOT_STARTED',
+		startDate: new Date(),
+		deliveryDate: new Date(),
 	}
 
 	const form = useForm({
 		defaultValues: myDefaultValues,
 		validators: {
-			onSubmit: CreateProjectFormSchema,
-			onChange: CreateProjectFormSchema,
+			onSubmit: CreateProjectSchema,
+			onChange: CreateProjectSchema,
 		},
 		onSubmit: async ({ value }) => {
 			console.log('form submitted', value)
@@ -79,6 +83,10 @@ export default function ProjectCreateFormShadcnTanstack() {
 								return (
 									<Field data-invalid={isInvalid}>
 										<FieldLabel htmlFor={field.name}>Name</FieldLabel>
+										<FieldDescription>
+											This is the project name. Enter an unique name for the
+											project. Must be less than 30 characters.
+										</FieldDescription>
 										<Input
 											id={field.name}
 											name={field.name}
@@ -87,12 +95,8 @@ export default function ProjectCreateFormShadcnTanstack() {
 											onChange={(e) => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="My awesome project"
-											autoComplete="off"
 										/>
-										<FieldDescription>
-											This is the project name. Enter an unique name for the
-											project. Must be less than 30 characters.
-										</FieldDescription>
+
 										{isInvalid && (
 											<FieldError errors={field.state.meta.errors} />
 										)}
@@ -109,7 +113,8 @@ export default function ProjectCreateFormShadcnTanstack() {
 								return (
 									<Field data-invalid={isInvalid}>
 										<FieldLabel htmlFor={field.name}>Description</FieldLabel>
-										<Input
+										<FieldDescription>Describe your project.</FieldDescription>
+										<Textarea
 											id={field.name}
 											name={field.name}
 											value={field.state.value as string}
@@ -117,11 +122,8 @@ export default function ProjectCreateFormShadcnTanstack() {
 											onChange={(e) => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="This project is about ..."
-											autoComplete="off"
+											className="min-h-[120px]"
 										/>
-										<FieldDescription>
-											Enter a description for the project.
-										</FieldDescription>
 										{isInvalid && (
 											<FieldError errors={field.state.meta.errors} />
 										)}
@@ -167,23 +169,40 @@ export default function ProjectCreateFormShadcnTanstack() {
 					<FieldLegend>Project Status</FieldLegend>
 					<FieldDescription>Select the status of the project</FieldDescription>
 					<FieldGroup>
-						<Field>
-							<FieldLabel htmlFor="status">Status</FieldLabel>
-							<Select defaultValue="NOT_STARTED" name="status">
-								<SelectTrigger id="status">
-									<SelectValue placeholder="Select Status" />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectGroup>
-										<SelectItem value="NOT_STARTED">Not Started</SelectItem>
-										<SelectItem value="ON_TRACK">On Track</SelectItem>
-										<SelectItem value="OFF_TRACK">Off Track</SelectItem>
-										<SelectItem value="ON_HOLD">On Hold</SelectItem>
-										<SelectItem value="COMPLETED">Completed</SelectItem>
-									</SelectGroup>
-								</SelectContent>
-							</Select>
-						</Field>
+						<form.Field
+							name="status"
+							children={(field) => {
+								const isInvalid =
+									field.state.meta.isTouched && !field.state.meta.isValid
+
+								return (
+									<Field data-invalid={isInvalid}>
+										<FieldLabel htmlFor={field.name}>Status</FieldLabel>
+										<Select
+											defaultValue="NOT_STARTED"
+											name={field.name}
+											value={field.state.value}
+											onValueChange={field.handleChange}
+										>
+											<SelectTrigger id={field.name} aria-invalid={isInvalid}>
+												<SelectValue placeholder="Select Status" />
+											</SelectTrigger>
+											<SelectContent>
+												<SelectGroup>
+													<SelectItem value="NOT_STARTED">
+														Not Started
+													</SelectItem>
+													<SelectItem value="ON_TRACK">On Track</SelectItem>
+													<SelectItem value="OFF_TRACK">Off Track</SelectItem>
+													<SelectItem value="ON_HOLD">On Hold</SelectItem>
+													<SelectItem value="COMPLETED">Completed</SelectItem>
+												</SelectGroup>
+											</SelectContent>
+										</Select>
+									</Field>
+								)
+							}}
+						/>
 					</FieldGroup>
 				</FieldSet>
 				<Field orientation="horizontal">
