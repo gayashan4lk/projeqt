@@ -20,10 +20,13 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
-import { CreateProjectActionResponse } from '@/types/projectSchema'
+import {
+	CreateProjectActionResponse,
+	CreateProjectFormSchema,
+	CreateProjectFormSchemaType,
+} from '@/types/projectSchema'
 import { useActionState } from 'react'
 import { useForm } from '@tanstack/react-form'
-import { CreateProjectSchema } from '@/types/projectSchema'
 import { Input } from '@/components/ui/input'
 
 const initialState: CreateProjectActionResponse = {
@@ -36,21 +39,26 @@ export default function ProjectCreateFormShadcnTanstack() {
 
 	const fieldErrors = state?.errors?.fieldErrors || {}
 
+	const myDefaultValues: CreateProjectFormSchemaType = {
+		name: '',
+		description: '',
+	}
+
 	const form = useForm({
+		defaultValues: myDefaultValues,
 		validators: {
-			onSubmit: CreateProjectSchema,
-			onChange: CreateProjectSchema,
-			onBlur: CreateProjectSchema,
+			onSubmit: CreateProjectFormSchema,
+			onChange: CreateProjectFormSchema,
 		},
-		onSubmit: () => {
-			console.log('form submitted')
+		onSubmit: async ({ value }) => {
+			console.log('form submitted', value)
 		},
 	})
 
 	return (
 		<form
-			onSubmit={(e) => {
-				e.preventDefault()
+			action={action}
+			onSubmit={() => {
 				form.handleSubmit()
 			}}
 			className="w-96"
@@ -161,7 +169,7 @@ export default function ProjectCreateFormShadcnTanstack() {
 					<FieldGroup>
 						<Field>
 							<FieldLabel htmlFor="status">Status</FieldLabel>
-							<Select defaultValue="">
+							<Select defaultValue="NOT_STARTED" name="status">
 								<SelectTrigger id="status">
 									<SelectValue placeholder="Select Status" />
 								</SelectTrigger>
