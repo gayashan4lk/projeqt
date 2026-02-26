@@ -1,9 +1,9 @@
-import ProjectCreateFormShadcn from '@/components/custom/project/project-create-form-shadcn'
+import ProjectCreateFormShadcnTanstack from '@/components/custom/project/project-create-form-shadcn-tanstack'
 
 export default function CreateProject() {
 	return (
 		<main>
-			<ProjectCreateFormShadcn />
+			<ProjectCreateFormShadcnTanstack />
 		</main>
 	)
 }
