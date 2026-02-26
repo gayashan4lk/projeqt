@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import {
 	Field,
 	FieldDescription,
+	FieldError,
 	FieldGroup,
 	FieldLabel,
 	FieldLegend,
@@ -21,6 +22,9 @@ import {
 } from '@/components/ui/select'
 import { CreateProjectActionResponse } from '@/types/projectSchema'
 import { useActionState } from 'react'
+import { useForm } from '@tanstack/react-form'
+import { CreateProjectSchema } from '@/types/projectSchema'
+import { Input } from '@/components/ui/input'
 
 const initialState: CreateProjectActionResponse = {
 	success: false,
@@ -32,8 +36,25 @@ export default function ProjectCreateFormShadcnTanstack() {
 
 	const fieldErrors = state?.errors?.fieldErrors || {}
 
+	const form = useForm({
+		validators: {
+			onSubmit: CreateProjectSchema,
+			onChange: CreateProjectSchema,
+			onBlur: CreateProjectSchema,
+		},
+		onSubmit: () => {
+			console.log('form submitted')
+		},
+	})
+
 	return (
-		<form action={action} className="w-96">
+		<form
+			onSubmit={(e) => {
+				e.preventDefault()
+				form.handleSubmit()
+			}}
+			className="w-96"
+		>
 			<FieldGroup>
 				<FieldSet>
 					<FieldLegend>Overview</FieldLegend>
@@ -41,26 +62,65 @@ export default function ProjectCreateFormShadcnTanstack() {
 						Enter project name and description
 					</FieldDescription>
 					<FieldGroup>
-						<Field>
-							<FieldLabel htmlFor="name">Name</FieldLabel>
-							<input
-								id="name"
-								type="text"
-								name="name"
-								placeholder="My awesome project"
-								className="block w-full rounded-md border-2 border-slate-300 p-2"
-							/>
-						</Field>
-						<Field>
-							<FieldLabel htmlFor="description">Description</FieldLabel>
-							<input
-								id="description"
-								type="text"
-								name="description"
-								placeholder="This project is about ..."
-								className="block w-full rounded-md border-2 border-slate-300 p-2"
-							/>
-						</Field>
+						<form.Field
+							name="name"
+							children={(field) => {
+								const isInvalid =
+									field.state.meta.isTouched && !field.state.meta.isValid
+
+								return (
+									<Field data-invalid={isInvalid}>
+										<FieldLabel htmlFor={field.name}>Name</FieldLabel>
+										<Input
+											id={field.name}
+											name={field.name}
+											value={field.state.value as string}
+											onBlur={field.handleBlur}
+											onChange={(e) => field.handleChange(e.target.value)}
+											aria-invalid={isInvalid}
+											placeholder="My awesome project"
+											autoComplete="off"
+										/>
+										<FieldDescription>
+											This is the project name. Enter an unique name for the
+											project. Must be less than 30 characters.
+										</FieldDescription>
+										{isInvalid && (
+											<FieldError errors={field.state.meta.errors} />
+										)}
+									</Field>
+								)
+							}}
+						/>
+						<form.Field
+							name="description"
+							children={(field) => {
+								const isInvalid =
+									field.state.meta.isTouched && !field.state.meta.isValid
+
+								return (
+									<Field data-invalid={isInvalid}>
+										<FieldLabel htmlFor={field.name}>Description</FieldLabel>
+										<Input
+											id={field.name}
+											name={field.name}
+											value={field.state.value as string}
+											onBlur={field.handleBlur}
+											onChange={(e) => field.handleChange(e.target.value)}
+											aria-invalid={isInvalid}
+											placeholder="This project is about ..."
+											autoComplete="off"
+										/>
+										<FieldDescription>
+											Enter a description for the project.
+										</FieldDescription>
+										{isInvalid && (
+											<FieldError errors={field.state.meta.errors} />
+										)}
+									</Field>
+								)
+							}}
+						/>
 					</FieldGroup>
 				</FieldSet>
 

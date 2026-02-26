@@ -1,12 +1,21 @@
 import { z } from 'zod'
 
-const ProjectStatus = z.enum(['NOT_STARTED', 'ON_TRACK', 'OFF_TRACK', 'ON_HOLD', 'COMPLETED'])
+const ProjectStatus = z.enum([
+	'NOT_STARTED',
+	'ON_TRACK',
+	'OFF_TRACK',
+	'ON_HOLD',
+	'COMPLETED',
+])
 
 export type ProjectStatus = z.infer<typeof ProjectStatus>
 
 export const ProjectSchema = z.object({
 	id: z.string(),
-	name: z.string().min(1, 'Name is required'),
+	name: z
+		.string()
+		.min(1, 'Name cannot be empty')
+		.max(30, 'Name must be less than 30 characters'),
 	description: z.string().nullable(),
 	startDate: z.coerce.date({ error: 'Start date is required' }),
 	deliveryDate: z.coerce.date({ error: 'Delivery date is required' }),
@@ -18,7 +27,12 @@ export const ProjectSchema = z.object({
 
 export type Project = z.infer<typeof ProjectSchema>
 
-export const CreateProjectSchema = ProjectSchema.omit({ id: true, createdAt: true, updatedAt: true, active: true })
+export const CreateProjectSchema = ProjectSchema.omit({
+	id: true,
+	createdAt: true,
+	updatedAt: true,
+	active: true,
+})
 
 type CreateProjectFormData = z.infer<typeof CreateProjectSchema>
 
