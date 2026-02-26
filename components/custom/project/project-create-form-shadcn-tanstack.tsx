@@ -20,39 +20,53 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
-import {
-	CreateProjectActionResponse,
-	CreateProjectSchema,
-	CreateProjectFormData,
-} from '@/types/projectSchema'
+import { CreateProjectActionResponse } from '@/types/projectSchema'
 import { useActionState } from 'react'
 import { useForm } from '@tanstack/react-form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import z from 'zod'
 
 const initialState: CreateProjectActionResponse = {
 	success: false,
 	message: '',
 }
 
+const CreateProjectFormSchema = z.object({
+	name: z
+		.string()
+		.min(1, 'Name cannot be empty')
+		.max(30, 'Name must be less than 30 characters'),
+	description: z.string(),
+	status: z.enum([
+		'NOT_STARTED',
+		'ON_TRACK',
+		'OFF_TRACK',
+		'ON_HOLD',
+		'COMPLETED',
+	]),
+	startDate: z.string().min(1, 'Start date is required'),
+	deliveryDate: z.string().min(1, 'Delivery date is required'),
+})
+
 export default function ProjectCreateFormShadcnTanstack() {
 	const [state, action, isPending] = useActionState(createProject, initialState)
 
 	const fieldErrors = state?.errors?.fieldErrors || {}
 
-	const myDefaultValues: CreateProjectFormData = {
+	const myDefaultValues = {
 		name: '',
 		description: '',
 		status: 'NOT_STARTED',
-		startDate: new Date(),
-		deliveryDate: new Date(),
+		startDate: '',
+		deliveryDate: '',
 	}
 
 	const form = useForm({
 		defaultValues: myDefaultValues,
 		validators: {
-			onSubmit: CreateProjectSchema,
-			onChange: CreateProjectSchema,
+			onSubmit: CreateProjectFormSchema,
+			onChange: CreateProjectFormSchema,
 		},
 		onSubmit: async ({ value }) => {
 			console.log('form submitted', value)
