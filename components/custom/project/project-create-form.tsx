@@ -26,7 +26,6 @@ import { useForm } from '@tanstack/react-form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import z from 'zod'
-import { DatePickerInputTemp } from '../date-picker-input-temp'
 import DatePickerInput from '../date-picker-input'
 
 const initialState: CreateProjectActionResponse = {
