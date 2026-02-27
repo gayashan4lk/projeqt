@@ -26,7 +26,8 @@ import { useForm } from '@tanstack/react-form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import z from 'zod'
-import { DatePickerInput } from '../date-picker-input'
+import { DatePickerInputTemp } from '../date-picker-input-temp'
+import DatePickerInput from '../date-picker-input'
 
 const initialState: CreateProjectActionResponse = {
 	success: false,
@@ -50,7 +51,7 @@ const CreateProjectFormSchema = z.object({
 	deliveryDate: z.any(),
 })
 
-export default function ProjectCreateFormShadcnTanstack() {
+export default function ProjectCreateForm() {
 	const [state, action, isPending] = useActionState(createProject, initialState)
 
 	const fieldErrors = state?.errors?.fieldErrors || {}
@@ -169,17 +170,7 @@ export default function ProjectCreateFormShadcnTanstack() {
 										<FieldDescription>
 											Enter the start date of your project
 										</FieldDescription>
-										<Input
-											id={field.name}
-											name={field.name}
-											type="date"
-											value={field.state.value as string}
-											onBlur={field.handleBlur}
-											onChange={(e) => field.handleChange(e.target.value)}
-											aria-invalid={isInvalid}
-											placeholder="Select a date"
-										/>
-
+										<DatePickerInput field={field} />
 										{isInvalid && (
 											<FieldError errors={field.state.meta.errors} />
 										)}
@@ -187,23 +178,6 @@ export default function ProjectCreateFormShadcnTanstack() {
 								)
 							}}
 						/>
-
-						{/* <form.Field
-							name="startDate"
-							children={(field) => {
-								const isInvalid =
-									field.state.meta.isTouched && !field.state.meta.isValid
-
-								return (
-									<DatePickerInput
-										isInvalid={isInvalid}
-										field={field}
-										fieldLabel="Start Date"
-										fieldDescription="Enter the start date of your project"
-									/>
-								)
-							}}
-						/> */}
 						<form.Field
 							name="deliveryDate"
 							children={(field) => {
@@ -216,17 +190,7 @@ export default function ProjectCreateFormShadcnTanstack() {
 										<FieldDescription>
 											Enter the delivery date of your project
 										</FieldDescription>
-										<Input
-											id={field.name}
-											name={field.name}
-											type="date"
-											value={field.state.value as string}
-											onBlur={field.handleBlur}
-											onChange={(e) => field.handleChange(e.target.value)}
-											aria-invalid={isInvalid}
-											placeholder="Select a date"
-										/>
-
+										<DatePickerInput field={field} />
 										{isInvalid && (
 											<FieldError errors={field.state.meta.errors} />
 										)}
