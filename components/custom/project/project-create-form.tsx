@@ -69,9 +69,6 @@ export default function ProjectCreateForm() {
 			onSubmit: CreateProjectFormSchema,
 			onChange: CreateProjectFormSchema,
 		},
-		onSubmit: async ({ value }) => {
-			console.log('form submitted', value)
-		},
 	})
 
 	return (
