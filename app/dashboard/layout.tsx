@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 			<AppSidebar />
 			<main>
 				<SidebarTrigger />
-				<div className="px-6">{children}</div>
+				<div className="mt-6 px-6">{children}</div>
 			</main>
 		</SidebarProvider>
 	)
