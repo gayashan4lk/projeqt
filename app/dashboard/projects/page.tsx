@@ -10,7 +10,7 @@ export default async function Projects() {
 		<div>
 			<main>
 				<Link href="/dashboard/projects/create">
-					<Button variant="default" className="mb-2">
+					<Button variant="default" className="mb-2 cursor-pointer">
 						<FolderPlus />
 						New Project
 					</Button>
