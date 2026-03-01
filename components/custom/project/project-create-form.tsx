@@ -112,6 +112,9 @@ export default function ProjectCreateForm() {
 										{isInvalid && (
 											<FieldError errors={field.state.meta.errors} />
 										)}
+										{fieldErrors.name && (
+											<FieldError>{fieldErrors.name[0]}</FieldError>
+										)}
 									</Field>
 								)
 							}}
@@ -138,6 +141,9 @@ export default function ProjectCreateForm() {
 										/>
 										{isInvalid && (
 											<FieldError errors={field.state.meta.errors} />
+										)}
+										{fieldErrors.description && (
+											<FieldError>{fieldErrors.description[0]}</FieldError>
 										)}
 									</Field>
 								)
@@ -170,6 +176,9 @@ export default function ProjectCreateForm() {
 										{isInvalid && (
 											<FieldError errors={field.state.meta.errors} />
 										)}
+										{fieldErrors.startDate && (
+											<FieldError>{fieldErrors.startDate[0]}</FieldError>
+										)}
 									</Field>
 								)
 							}}
@@ -189,6 +198,9 @@ export default function ProjectCreateForm() {
 										<DatePickerInput field={field} />
 										{isInvalid && (
 											<FieldError errors={field.state.meta.errors} />
+										)}
+										{fieldErrors.deliveryDate && (
+											<FieldError>{fieldErrors.deliveryDate[0]}</FieldError>
 										)}
 									</Field>
 								)
@@ -231,6 +243,9 @@ export default function ProjectCreateForm() {
 												</SelectGroup>
 											</SelectContent>
 										</Select>
+										{fieldErrors.status && (
+											<FieldError>{fieldErrors.status[0]}</FieldError>
+										)}
 									</Field>
 								)
 							}}
