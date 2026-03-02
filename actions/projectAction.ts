@@ -67,15 +67,6 @@ export async function updateProject(
 
 	if (data) {
 		try {
-			// await prisma.project.create({
-			// 	data: {
-			// 		name: data.name,
-			// 		description: data.description,
-			// 		startDate: data.startDate,
-			// 		deliveryDate: data.deliveryDate,
-			// 		status: data.status,
-			// 	},
-			// })
 			await prisma.project.update({
 				where: {
 					id: id,
