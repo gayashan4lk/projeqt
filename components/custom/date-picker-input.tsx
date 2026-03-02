@@ -12,7 +12,8 @@ import {
 } from '@/components/ui/popover'
 
 export default function DatePickerInput({ field }: { field: any }) {
-	const [date, setDate] = React.useState<Date>()
+	console.log('field state value in datepickerinput:', field.state.value)
+	const [date, setDate] = React.useState<Date>(field.state.value)
 
 	return (
 		<>
@@ -38,8 +39,8 @@ export default function DatePickerInput({ field }: { field: any }) {
 						mode="single"
 						selected={date}
 						onSelect={(e) => {
-							setDate(e)
 							if (e) {
+								setDate(e)
 								field.handleChange(format(e, 'yyyy-MM-dd'))
 							}
 						}}
