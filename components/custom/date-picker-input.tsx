@@ -12,7 +12,6 @@ import {
 } from '@/components/ui/popover'
 
 export default function DatePickerInput({ field }: { field: any }) {
-	console.log('field state value in datepickerinput:', field.state.value)
 	const [date, setDate] = React.useState<Date>(field.state.value)
 
 	return (

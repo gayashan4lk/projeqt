@@ -52,7 +52,6 @@ export async function updateProject(
 	prevState: any | null,
 	formData: FormData,
 ): Promise<CreateProjectActionResponse> {
-	console.log('bind id', id)
 	const { data, success, error } = CreateProjectSchema.safeParse(
 		Object.fromEntries(formData.entries()),
 	)

@@ -11,8 +11,6 @@ export default async function EditProject(props: {
 		where: { id: id },
 	})
 
-	console.log(project)
-
 	if (!project) {
 		return (
 			<div>
