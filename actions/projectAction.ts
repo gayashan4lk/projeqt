@@ -46,3 +46,47 @@ export async function createProject(
 	revalidatePath('/dashboard/projects')
 	redirect('/dashboard/projects')
 }
+
+export async function updateProject(
+	id: string,
+	prevState: any | null,
+	formData: FormData,
+): Promise<CreateProjectActionResponse> {
+	const { data, success, error } = CreateProjectSchema.safeParse(
+		Object.fromEntries(formData.entries()),
+	)
+
+	if (!success) {
+		return {
+			success: false,
+			message: 'Please fix the form errors',
+			errors: z.flattenError(error),
+		}
+	}
+
+	if (data) {
+		try {
+			await prisma.project.update({
+				where: {
+					id: id,
+				},
+				data: {
+					name: data.name,
+					description: data.description,
+					startDate: data.startDate,
+					deliveryDate: data.deliveryDate,
+					status: data.status,
+				},
+			})
+		} catch (error) {
+			console.error('Database error:', error)
+			return {
+				success: false,
+				message: 'Failed to create project in the database',
+			}
+		}
+	}
+
+	revalidatePath(`/dashboard/projects/${id}`)
+	redirect(`/dashboard/projects/${id}`)
+}

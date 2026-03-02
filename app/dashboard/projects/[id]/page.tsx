@@ -1,8 +1,13 @@
 import ProjectStatusBadge from '@/components/custom/project/project-status-badge'
 import Breadcrumbs from '@/components/custom/shared/breadcrumbs'
+import { Button } from '@/components/ui/button'
 import prisma from '@/lib/prisma'
+import { Pencil } from 'lucide-react'
+import Link from 'next/link'
 
-export default async function ProjectPage(props: { params: { id: string } }) {
+export default async function ProjectPage(props: {
+	params: Promise<{ id: string }>
+}) {
 	const { id } = await props.params
 
 	const project = await prisma.project.findUnique({
@@ -41,7 +46,15 @@ export default async function ProjectPage(props: { params: { id: string } }) {
 						},
 					]}
 				/>
-				<h1 className="text-2xl font-bold">{project.name}</h1>
+				<div className="flex flex-row justify-between">
+					<h1 className="text-2xl font-bold">{project.name}</h1>
+					<Link href={`/dashboard/projects/${id}/edit`}>
+						<Button variant="default" className="mb-2 cursor-pointer">
+							<Pencil />
+							Edit
+						</Button>
+					</Link>
+				</div>
 				<div className="mt-4 grid gap-3 divide-y">
 					<DescriptionListItem field="Name" children={project.name} />
 					<DescriptionListItem
