@@ -1,3 +1,4 @@
+import DeleteProjectButton from '@/components/custom/project/delete-project-button'
 import ProjectStatusBadge from '@/components/custom/project/project-status-badge'
 import Breadcrumbs from '@/components/custom/shared/breadcrumbs'
 import { Button } from '@/components/ui/button'
@@ -54,6 +55,7 @@ export default async function ProjectPage(props: {
 							Edit
 						</Button>
 					</Link>
+					<DeleteProjectButton id={id} />
 				</div>
 				<div className="mt-4 grid gap-3 divide-y">
 					<DescriptionListItem field="Name" children={project.name} />
