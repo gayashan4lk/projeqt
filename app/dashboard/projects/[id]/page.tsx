@@ -46,13 +46,15 @@ export default async function ProjectPage(props: {
 						},
 					]}
 				/>
-				<h1 className="text-2xl font-bold">{project.name}</h1>
-				<Link href={`/dashboard/projects/${id}/edit`}>
-					<Button variant="default" className="mb-2 cursor-pointer">
-						<Pencil />
-						Edit
-					</Button>
-				</Link>
+				<div className="flex flex-row justify-between">
+					<h1 className="text-2xl font-bold">{project.name}</h1>
+					<Link href={`/dashboard/projects/${id}/edit`}>
+						<Button variant="default" className="mb-2 cursor-pointer">
+							<Pencil />
+							Edit
+						</Button>
+					</Link>
+				</div>
 				<div className="mt-4 grid gap-3 divide-y">
 					<DescriptionListItem field="Name" children={project.name} />
 					<DescriptionListItem
