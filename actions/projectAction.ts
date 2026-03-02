@@ -90,3 +90,18 @@ export async function updateProject(
 	revalidatePath(`/dashboard/projects/${id}`)
 	redirect(`/dashboard/projects/${id}`)
 }
+
+export async function deleteProject(id: string) {
+	try {
+		await prisma.project.delete({
+			where: {
+				id: id,
+			},
+		})
+	} catch (error) {
+		console.error('Database error:', error)
+	}
+
+	revalidatePath('/dashboard/projects')
+	redirect('/dashboard/projects')
+}
