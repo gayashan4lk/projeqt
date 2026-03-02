@@ -146,7 +146,6 @@ export default function ProjectEditForm({ project }: { project: Project }) {
 					<form.Field
 						name="startDate"
 						children={(field) => {
-							console.log('startDate:', field.state.value)
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
 
