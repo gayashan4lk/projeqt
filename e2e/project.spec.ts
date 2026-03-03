@@ -4,7 +4,7 @@ test.describe.serial('Project create and delete flow', () => {
 	const projectName = `Test Project ${Math.random().toString(36).substring(2, 8)}`
 
 	test('should create a project', async ({ page }) => {
-		await page.goto('http://localhost:3000/dashboard/projects')
+		await page.goto('/dashboard/projects')
 		await page.getByRole('button', { name: 'New Project' }).click()
 		await page.getByRole('textbox', { name: 'Name' }).click()
 		await page.getByRole('textbox', { name: 'Name' }).fill(projectName)
@@ -36,7 +36,7 @@ test.describe.serial('Project create and delete flow', () => {
 	})
 
 	test('should delete a project', async ({ page }) => {
-		await page.goto('http://localhost:3000/dashboard/projects')
+		await page.goto('/dashboard/projects')
 		await page
 			.getByTestId(`project-card-${projectName}`)
 			.getByRole('link')
