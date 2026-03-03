@@ -15,6 +15,7 @@
     "@tanstack/react-devtools": "^0.9.6",
     "@tanstack/react-form": "^1.28.3",
     "@tanstack/react-form-devtools": "^0.2.16",
+    "better-auth": "^1.5.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
