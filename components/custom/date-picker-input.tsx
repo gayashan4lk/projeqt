@@ -25,6 +25,7 @@ export default function DatePickerInput({ field }: { field: any }) {
 			<Popover>
 				<PopoverTrigger asChild>
 					<Button
+						data-testid={field.name}
 						variant="outline"
 						data-empty={!date}
 						className="data-[empty=true]:text-muted-foreground w-[280px] justify-start text-left font-normal"
