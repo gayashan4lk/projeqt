@@ -25,8 +25,21 @@ test('should create a project', async ({ page }) => {
 	await page.getByRole('combobox', { name: 'Status' }).click()
 	await page.getByRole('option', { name: 'On Track' }).click()
 	await page.getByRole('button', { name: 'Submit' }).click()
-	await page.getByRole('link').filter({ hasText: /^$/ }).first().click()
+	await page
+		.getByTestId('project-card-Test Project 1')
+		.getByRole('link')
+		.click()
 	await expect(
 		page.getByRole('heading', { name: 'Test Project' }),
 	).toBeVisible()
+})
+
+test('should delete a project', async ({ page }) => {
+	await page.goto('http://localhost:3000/dashboard/projects')
+	await page
+		.getByTestId('project-card-Test Project 1')
+		.getByRole('link')
+		.click()
+	await page.getByRole('button', { name: 'Delete Project' }).click()
+	await expect(page.getByTestId('project-card-Test Project 1')).toBeHidden()
 })
